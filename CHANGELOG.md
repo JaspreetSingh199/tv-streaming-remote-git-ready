@@ -1,5 +1,11 @@
 # Changelog
 
+## Repository policy update — use as-is
+
+- Updated the project story and usage notice: the repository is shared for anyone to use, adapt, and share under the included permissive license, as-is and without warranty.
+- Clarified AI assistance on an existing, outdated codebase and the lack of independent security/provenance review.
+- Added a `LICENSE` file with an express limitation for inherited or third-party material whose rights may differ.
+
 This is a condensed milestone history. Many intermediary builds were experiments; notes describe intent and do not imply that every behavior is fully reliable against the live Netflix site.
 
 ## 1.5.44 — Generic branding and Back label
