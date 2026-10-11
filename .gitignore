@@ -1,0 +1,20 @@
+# OS/editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Local bundles, captures, and diagnostic exports
+*.zip
+*.bundle
+*.har
+*.log
+*network-capture*
+*session-token*
+
+# Dependencies/build output if added later
+node_modules/
+dist/
+build/

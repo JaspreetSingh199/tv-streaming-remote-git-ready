@@ -1,0 +1,314 @@
+/* Applied only while content.js adds .hnr1533-player-mode to <html>. */
+html.hnr1533-player-mode [data-uia="controls-standard"],
+html.hnr1533-player-mode [data-uia="controls-standard"] *,
+html.hnr1533-player-mode [data-uia="player"].inactive,
+html.hnr1533-player-mode .watch-video--top-controls-container,
+html.hnr1533-player-mode .watch-video--bottom-controls-container,
+html.hnr1533-player-mode .watch-video--bottom-controls-container-scrim,
+html.hnr1533-player-mode .watch-video--controls-container,
+html.hnr1533-player-mode [data-uia="episode-selector"],
+html.hnr1533-player-mode .PlayerControls--container,
+html.hnr1533-player-mode .PlayerControlsNeo__layout,
+html.hnr1533-player-mode .PlayerControls--bottom,
+html.hnr1533-player-keep-visible {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
+  clip-path: none !important;
+  max-height: none !important;
+}
+
+html.hnr1533-player-mode [data-uia="controls-standard"],
+html.hnr1533-player-mode .watch-video--top-controls-container,
+html.hnr1533-player-mode .watch-video--bottom-controls-container,
+html.hnr1533-player-mode .watch-video--bottom-controls-container-scrim,
+html.hnr1533-player-mode .watch-video--controls-container,
+html.hnr1533-player-mode [data-uia="episode-selector"],
+html.hnr1533-player-mode .PlayerControls--container,
+html.hnr1533-player-mode .PlayerControlsNeo__layout,
+html.hnr1533-player-mode .PlayerControls--bottom {
+  display: flex !important;
+}
+
+html.hnr1533-player-mode [data-uia="controls-standard"] [data-uia^="control-"],
+html.hnr1533-player-mode [data-uia="controls-standard"] button,
+html.hnr1533-player-mode [data-uia="controls-standard"] [role="button"],
+html.hnr1533-player-mode [data-uia="controls-standard"] [role="slider"],
+html.hnr1533-player-mode [data-uia="episode-selector"] [data-uia="titleCard--container"] {
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  animation: none !important;
+  transition: none !important;
+}
+
+#hnr1533-player-overlay {
+  position: fixed;
+  z-index: 2147483646;
+  right: max(26px, 3vw);
+  bottom: max(26px, 4vh);
+  width: min(510px, 92vw);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+  padding: 14px;
+  border: 1px solid rgba(255,255,255,.22);
+  border-radius: 18px;
+  background: linear-gradient(155deg, rgba(31,31,31,.97), rgba(8,8,8,.96));
+  box-shadow: 0 18px 54px rgba(0,0,0,.58), inset 0 1px 0 rgba(255,255,255,.06);
+  color: #fff;
+  font: 600 13px/1.2 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+#hnr1533-player-overlay[hidden] { display: none !important; }
+#hnr1533-player-overlay .hnr1533-overlay-item[hidden] { display: none !important; }
+#hnr1533-player-overlay .hnr1533-overlay-head {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 2px 2px 7px;
+  border-bottom: 1px solid rgba(255,255,255,.12);
+  margin-bottom: 2px;
+}
+#hnr1533-player-overlay .hnr1533-overlay-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+}
+#hnr1533-player-overlay .hnr1533-brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: #e50914;
+  color: #fff;
+  font-size: 19px;
+  font-weight: 900;
+  box-shadow: 0 4px 12px rgba(229,9,20,.28);
+}
+#hnr1533-player-overlay .hnr1533-brand-copy { display: flex; flex-direction: column; gap: 3px; }
+#hnr1533-player-overlay .hnr1533-brand-name { font-size: 14px; font-weight: 750; letter-spacing: .01em; }
+#hnr1533-player-overlay .hnr1533-brand-subtitle { color: #aaa; font-size: 9px; letter-spacing: .15em; font-weight: 800; }
+#hnr1533-player-overlay .hnr1533-overlay-hint {
+  color: #bdbdbd;
+  text-align: right;
+  font-size: 10px;
+  line-height: 1.5;
+  white-space: normal;
+}
+#hnr1533-player-overlay .hnr1533-overlay-hint span { color: #e50914; padding: 0 2px; }
+#hnr1533-player-overlay .hnr1533-overlay-item {
+  min-width: 0;
+  min-height: 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 5px 8px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 12px;
+  background: linear-gradient(160deg, rgba(65,65,65,.72), rgba(35,35,35,.94));
+  color: #eee;
+  text-align: center;
+  user-select: none;
+  -webkit-user-select: none;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+  transition: background .12s ease, border-color .12s ease, transform .12s ease;
+}
+#hnr1533-player-overlay .hnr1533-overlay-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  color: #f5f5f5;
+}
+#hnr1533-player-overlay .hnr1533-overlay-icon svg {
+  display: block;
+  width: 25px;
+  height: 25px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+#hnr1533-player-overlay .hnr1533-overlay-label { display: block; font-size: 12px; font-weight: 650; }
+#hnr1533-player-overlay .hnr1533-action-episode { background: linear-gradient(160deg, rgba(70,39,40,.88), rgba(39,26,27,.96)); }
+#hnr1533-player-overlay .hnr1533-action-volume .hnr1533-overlay-icon { color: #e7e7e7; }
+#hnr1533-player-overlay .hnr1533-overlay-item.selected {
+  color: #fff;
+  background: linear-gradient(160deg, rgba(82,82,82,.98), rgba(42,42,42,.98));
+  border-color: #fff;
+  outline: 3px solid #fff;
+  outline-offset: 1px;
+  box-shadow: 0 0 0 2px rgba(0,0,0,.8), 0 0 22px rgba(255,255,255,.13), inset 0 1px 0 rgba(255,255,255,.14);
+  transform: translateY(-1px);
+}
+#hnr1533-player-overlay .hnr1533-overlay-item.selected .hnr1533-overlay-icon { color: #fff; }
+@media (max-width: 600px) {
+  #hnr1533-player-overlay { left: 4vw; right: 4vw; width: auto; bottom: 2vh; gap: 6px; padding: 10px; border-radius: 14px; }
+  #hnr1533-player-overlay .hnr1533-overlay-head { align-items: flex-start; }
+  #hnr1533-player-overlay .hnr1533-overlay-hint { max-width: 45%; font-size: 9px; }
+  #hnr1533-player-overlay .hnr1533-overlay-item { min-height: 58px; gap: 5px; }
+  #hnr1533-player-overlay .hnr1533-overlay-icon, #hnr1533-player-overlay .hnr1533-overlay-icon svg { width: 21px; height: 21px; }
+  #hnr1533-player-overlay .hnr1533-overlay-label { font-size: 10px; }
+}
+
+/* v1.5.20: preserve the native Netflix episode tray and option rows while the
+   TV remote player mode is active. This does not fabricate input or move the mouse. */
+html.hnr1533-player-mode [id^="selector-episode-option-"],
+html.hnr1533-player-mode [id^="selector-episode-option-"] *,
+html.hnr1533-player-mode [aria-label^="Episode "],
+html.hnr1533-player-mode [aria-label^="Episode "] * {
+  opacity: 1 !important;
+  visibility: visible !important;
+  animation: none !important;
+  transition: none !important;
+}
+html.hnr1533-player-mode [id^="selector-episode-option-"] {
+  pointer-events: auto !important;
+}
+
+
+/* v1.5.23: preserve the live Netflix episode tray while yellow focus navigates it. */
+html.hnr1533-player-mode [id^="selector-episode-option-"],
+html.hnr1533-player-mode [id^="selector-episode-option-"] *,
+html.hnr1533-player-mode [aria-label^="Episode "],
+html.hnr1533-player-mode [aria-label^="Episode "] *,
+html.hnr1533-player-mode [data-uia="episode-selector"],
+html.hnr1533-player-mode [data-uia*="episode-selector"] {
+  opacity: 1 !important; visibility: visible !important; animation: none !important; transition: none !important; pointer-events: auto !important;
+}
+
+
+/* v1.5.24: reliable focus visibility while the yellow square scrolls native episode rows. */
+html.hnr1533-player-mode [id^="selector-episode-option-"],
+html.hnr1533-player-mode [aria-label^="Episode "],
+html.hnr1533-player-mode [data-uia="controls-standard"] button,
+html.hnr1533-player-mode [data-uia^="control-"] {
+  pointer-events: auto !important;
+}
+
+
+/* v1.5.25: extension-owned yellow outline follows the actual focused Netflix episode row. */
+#hnr1533-native-episode-focus-ring {
+  position: fixed !important;
+  display: block !important;
+  box-sizing: border-box !important;
+  border: 3px solid #fff !important;
+  border-radius: 8px !important;
+  outline: 2px solid rgba(0,0,0,.78) !important;
+  outline-offset: 1px !important;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.65) !important;
+  pointer-events: none !important;
+  z-index: 2147483647 !important;
+}
+#hnr1533-native-episode-focus-ring[hidden] { display: none !important; }
+
+
+/* v1.5.27: Skip Intro/Recap lives outside controls-standard in some Netflix builds. */
+html.hnr1533-player-mode .watch-video--skip-content,
+html.hnr1533-player-mode .watch-video--skip-content > button,
+html.hnr1533-player-mode .watch-video--skip-content button,
+html.hnr1533-player-mode [data-uia="player-skip-intro"],
+html.hnr1533-player-mode [data-uia="player-skip-recap"],
+html.hnr1533-player-mode button[aria-label*="Skip Intro" i],
+html.hnr1533-player-mode button[aria-label*="Skip Recap" i] {
+  opacity: 1 !important; visibility: visible !important; pointer-events: auto !important;
+  animation: none !important; transition: none !important;
+}
+
+
+/* v1.5.37: TV-remote-first input. The extension cancels trusted physical pointer
+   events on Netflix's own app surface; script-driven .click()/event dispatch remains usable. */
+html.hnr1533-remote-only #appMountPoint,
+html.hnr1533-remote-only #appMountPoint * { cursor: none !important; }
+
+
+/* v1.5.40: extension-owned Audio & Subtitles picker mirrors Netflix's live
+   choices while selection remains delegated to its currently mounted option. */
+#hnr1533-audio-picker {
+  position: fixed !important;
+  z-index: 2147483647 !important;
+  top: max(7vh, 58px) !important;
+  right: max(24px, 3vw) !important;
+  width: min(430px, 92vw) !important;
+  max-height: 82vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+  padding: 14px !important;
+  border: 1px solid rgba(255,255,255,.24) !important;
+  border-radius: 18px !important;
+  background: linear-gradient(155deg,rgba(29,29,29,.985),rgba(7,7,7,.985)) !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,.72),inset 0 1px 0 rgba(255,255,255,.06) !important;
+  color: #fff !important;
+  font: 600 14px/1.25 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif !important;
+  pointer-events: auto !important;
+  backdrop-filter: blur(18px) !important;
+}
+#hnr1533-audio-picker[hidden] { display: none !important; }
+#hnr1533-audio-picker .hnr1533-audio-head { flex: 0 0 auto; padding: 3px 3px 12px; margin-bottom: 9px; border-bottom: 1px solid rgba(255,255,255,.13); }
+#hnr1533-audio-picker .hnr1533-audio-title { font-size: 16px; font-weight: 800; letter-spacing: .01em; }
+#hnr1533-audio-picker .hnr1533-audio-hint { color: #bdbdbd; font-size: 11px; margin-top: 6px; }
+#hnr1533-audio-picker .hnr1533-audio-list { min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; padding: 3px 4px 4px; }
+#hnr1533-audio-picker .hnr1533-audio-option { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 45px; box-sizing: border-box; padding: 10px 13px; border: 1px solid rgba(255,255,255,.14); border-radius: 11px; background: linear-gradient(160deg,rgba(58,58,58,.92),rgba(34,34,34,.97)); color: #f4f4f4; overflow-wrap: anywhere; }
+#hnr1533-audio-picker .hnr1533-audio-option.selected { border-color: #fff; outline: 3px solid #fff; outline-offset: 1px; background: #f6f6f6; color: #101010; box-shadow: 0 0 0 2px rgba(0,0,0,.85),0 0 18px rgba(255,255,255,.15); }
+#hnr1533-audio-picker .hnr1533-audio-option-name { flex: 1; min-width: 0; }
+#hnr1533-audio-picker .hnr1533-audio-check { font-size: 18px; font-weight: 900; }
+html.hnr1533-player-mode .hnr1533-audio-keep-visible,
+html.hnr1533-player-mode .hnr1533-audio-keep-visible * { opacity: 1 !important; visibility: visible !important; animation: none !important; transition: none !important; pointer-events: auto !important; }
+@media (max-width: 700px) { #hnr1533-audio-picker { left: 4vw !important; right: 4vw !important; width: auto !important; top: 4vh !important; max-height: 88vh !important; } }
+
+
+/* v1.5.41: native Netflix Audio & Subtitles options use the same live-DOM
+   focus ring/navigation model as native episode rows. */
+html.hnr1533-player-mode .track-list-container,
+html.hnr1533-player-mode .track-list-audio,
+html.hnr1533-player-mode .track-list-subtitle,
+html.hnr1533-player-mode [data-uia*="audio-subtitle" i],
+html.hnr1533-player-mode [data-uia^="audio-item-"],
+html.hnr1533-player-mode [data-uia^="subtitle-item-"],
+html.hnr1533-player-mode [role="dialog"] [role="radio"],
+html.hnr1533-player-mode [role="dialog"] [role="option"] {
+  opacity: 1 !important;
+  visibility: visible !important;
+  animation: none !important;
+  transition: none !important;
+}
+#hnr1533-native-audio-focus-ring {
+  position: fixed !important;
+  display: block !important;
+  box-sizing: border-box !important;
+  border: 3px solid #fff !important;
+  border-radius: 10px !important;
+  outline: 2px solid rgba(0,0,0,.78) !important;
+  outline-offset: 1px !important;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.65) !important;
+  pointer-events: none !important;
+  z-index: 2147483647 !important;
+}
+#hnr1533-native-audio-focus-ring[hidden] { display: none !important; }
+
+
+/* Ensure the actual ancestors of the native player/audio menu get the same visibility hold as their controls. */
+html.hnr1533-player-mode .hnr1533-player-keep-visible,
+html.hnr1533-player-mode .hnr1533-player-keep-visible * {
+  opacity: 1 !important;
+  visibility: visible !important;
+  animation: none !important;
+  transition: none !important;
+}
