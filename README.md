@@ -63,7 +63,7 @@ The adapter's exact cabling and CEC routing depend on the hardware arrangement. 
 - Native Netflix episode and Audio & Subtitles menu navigation where the live player DOM exposes the required elements.
 - Watch-page detection and a guarded page refresh after an episode route change, intended to recover Netflix controls after switching episodes.
 - A remote-only mode that suppresses physical pointer interaction over Netflix's app surface.
-- A Back/Escape action for navigating overlays and menus; on the bare Netflix browse page, Escape closes the current Netflix tab.
+- Context-aware Back handling for Escape, Browser Back, Backspace, and the Pulse-Eight `Clear` key; on the bare Browse page, a Yes/No prompt protects against accidental kiosk-window closure.
 - A custom extension icon and generic UI branding.
 
 These are intended behaviors, not a promise that every action works against every current Netflix layout. See [Known limitations](#known-limitations).
@@ -146,26 +146,35 @@ The checks cover JavaScript syntax, manifest JSON, and local files referenced by
 - Previous/Next Episode shortcuts are experimental and may not be recognized by Netflix; fallbacks depend on the native controls being mounted.
 - Seek, Skip Intro, and menu selection depend on Netflix exposing a usable control. Synthetic page events are not the same as trusted physical input, and Netflix may ignore them.
 - Remote-only pointer blocking makes physical mouse interaction with Netflix unavailable while the extension is enabled. Disable the extension to restore normal pointer use.
-- Escape on the bare Browse page closes the active Netflix tab. Use care if you have unsaved state or other work in that tab.
+- On the bare Browse page, the Back confirmation can close the Chrome window containing Netflix after explicit Yes confirmation. Do not test this in a window containing unrelated work.
 
 ## Privacy and permissions
 
 - The content script is configured to run on `https://www.netflix.com/*` only.
 - The manifest does not request the Chrome debugger permission and the implementation does not attach through Chrome DevTools Protocol.
 - The code in this repository contains no analytics or telemetry uploader. It uses Netflix's page DOM and browser-local state for navigation, capability detection, and recovery.
-- The background service worker handles one narrow request: closing the sender's current Netflix tab when the bare Browse-page Back/Escape action is invoked.
+- The background service worker handles the explicit close-confirmation request and closes the Chrome window containing the sender tab after validating the Netflix origin.
 
-## Personal-use and affiliation notice
+## AI-assisted experiment, provenance, and reuse
 
-This is an unofficial **personal-use project**. It is not affiliated with, endorsed by, or supported by Netflix, Samsung, or Pulse-Eight. Product and company names are used only to describe the environment this extension was built for.
+This was a personal HTPC experiment planned and iterated with ChatGPT. We discussed the living-room constraints, compared implementation approaches, and chose to adapt an existing outdated extension rather than pretend this was a clean-room implementation. AI assistance was used to inspect code and DOM evidence, propose changes, debug input routing, write documentation, and package releases. The owner tested the working controls on the target setup and supplied real device behavior and Netflix DOM details; the latest profile-picker and Back/close-confirmation flows were confirmed working in that setup.
 
-AI tools were used as development assistance on an existing, outdated codebase. The result contains legacy code, experimental changes, and behavior that has not been independently audited. Do not assume that AI assistance means the project is correct, secure, or production-ready.
+This repository is **not** an official Netflix, Samsung, or Pulse-Eight product. It began from legacy code, and its full provenance and third-party rights have not been independently audited. The included MIT license applies only to contributions that repository contributors are entitled to license; it does not override any third-party rights or licenses in inherited code or assets. Before publishing a public fork or using it commercially, review the provenance and licensing of the original extension and every included asset. The project is provided as-is, without a compatibility, security, or support guarantee.
 
-**No open-source license is granted by this repository.** It is kept for personal use and documentation of this setup; do not redistribute or reuse the code without the owner's permission. If you intend to publish the repository, check the code and any included assets for rights and licensing first.
+### Resume-ready summary
+
+**AI-assisted HTPC Remote-Control Experiment — TV Streaming Remote**
+
+- Planned an AI-assisted solution with ChatGPT for operating Netflix on a Windows HTPC from a Samsung TV remote through Pulse-Eight USB-CEC/libCEC input.
+- Evaluated the existing extension and chose an iterative adaptation strategy; refined keyboard-event routing, contextual Back behavior, safe kiosk exit confirmation, and Netflix profile-picker focus using live DOM evidence.
+- Built and tested a remote-first search keyboard, focus navigation, player controls, and profile selection; retained an air mouse as a fallback for pointer-heavy UI.
+- Used AI as a coding/debugging partner while validating behavior on the actual HTPC setup; documented limitations and packaged a versioned Chrome extension.
+
+**Be transparent in interviews:** this is an AI-assisted integration/debugging experiment on top of an existing codebase, not a greenfield extension authored entirely from scratch. Be prepared to explain the architecture, key routing, trade-offs, tests, and changes you personally reviewed or verified.
 
 ## Version
 
-Current extension package version: **1.5.47** (`manifest.json`). This code is an evolving snapshot and is not a promise of compatibility with future Netflix updates.
+Current extension package version: **1.5.55** (`manifest.json`). This code is an evolving snapshot and is not a promise of compatibility with future Netflix updates.
 
 
 ### Kiosk Escape behavior (v1.5.45)
