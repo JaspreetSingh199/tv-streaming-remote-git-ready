@@ -3174,21 +3174,47 @@ function onKey(e) {
  if(handled){e.preventDefault();e.stopImmediatePropagation();}
  if(e.key==="Enter"&&selected&&rendered(selected)&&!isText(selected)){e.preventDefault();e.stopImmediatePropagation();selected.click();}
 }
-// Debuggable Backspace long-press exit for Netflix's home/browse routes.
-// No focus/selection check: holding Backspace for 2 seconds requests window close.
+// Key-event diagnostics plus Backspace long-press exit for Netflix browse routes.
+// Diagnostic build logs every key so we can verify the actual input delivered by CEC Tray.
+console.info("[TV Remote Debug] Content script loaded:", location.href);
 let hnrBackspaceHoldTimer = null;
 let hnrBackspaceHoldTriggered = false;
 const hnrIsNetflixBrowseRoute = () => location.pathname === "/" || location.pathname === "/browse" || location.pathname.startsWith("/browse/");
+const hnrIsBackspaceEvent = e => e.key === "Backspace" || e.code === "Backspace" || e.keyCode === 8 || e.which === 8;
+const hnrKeyDebugDetails = e => ({
+  key: e.key,
+  code: e.code,
+  keyCode: e.keyCode,
+  which: e.which,
+  repeat: e.repeat,
+  route: location.pathname,
+  target: e.target?.tagName || null,
+  targetId: e.target?.id || null,
+  targetRole: e.target?.getAttribute?.("role") || null,
+  activeElement: document.activeElement?.tagName || null,
+  activeElementId: document.activeElement?.id || null,
+  defaultPrevented: e.defaultPrevented
+});
 
 document.addEventListener("keydown", e => {
-  if (e.key !== "Backspace" || e.repeat || !hnrIsNetflixBrowseRoute()) return;
+  console.log("[TV Remote Debug] keydown:", hnrKeyDebugDetails(e));
+  if (!hnrIsBackspaceEvent(e)) return;
+  if (!hnrIsNetflixBrowseRoute()) {
+    console.log("[TV Remote Debug] Backspace ignored for hold-exit: not on Netflix browse route.");
+    return;
+  }
+  if (e.repeat) {
+    console.log("[TV Remote Debug] Backspace repeat event received; initial hold timer remains active.");
+    return;
+  }
+
   hnrBackspaceHoldTriggered = false;
   console.log("[TV Remote] Backspace pressed on Netflix browse page; waiting 2000ms for hold.");
   if (hnrBackspaceHoldTimer !== null) window.clearTimeout(hnrBackspaceHoldTimer);
   hnrBackspaceHoldTimer = window.setTimeout(() => {
     hnrBackspaceHoldTimer = null;
     hnrBackspaceHoldTriggered = true;
-    console.log("[TV Remote] Backspace HOLD DETECTED (2000ms). Requesting Chrome kiosk window close.");
+    console.log("[TV Remote] Backspace HOLD DETECTED (2000ms). Requesting Chrome window close.");
     try {
       chrome.runtime.sendMessage({ type: "HNR_CLOSE_NETFLIX_BROWSE_TAB" }, response => {
         if (chrome.runtime.lastError) {
@@ -3204,7 +3230,8 @@ document.addEventListener("keydown", e => {
 }, true);
 
 document.addEventListener("keyup", e => {
-  if (e.key !== "Backspace" || !hnrIsNetflixBrowseRoute()) return;
+  console.log("[TV Remote Debug] keyup:", hnrKeyDebugDetails(e));
+  if (!hnrIsBackspaceEvent(e)) return;
   if (hnrBackspaceHoldTimer !== null) {
     window.clearTimeout(hnrBackspaceHoldTimer);
     hnrBackspaceHoldTimer = null;

@@ -181,3 +181,8 @@ On the bare Netflix home/browse page, Backspace closes the kiosk window only whe
 ### Backspace hold debug behavior (v1.5.47)
 
 On Netflix home/browse routes, holding Backspace for 2 seconds logs the hold detection and requests closure of the entire Chrome window, regardless of current focus or tab count. Short releases log that the hold threshold was not reached. Open DevTools Console to inspect `[TV Remote]` messages. Static validation only; test on the kiosk machine.
+
+
+## v1.5.48 — Key-event debug build
+
+This diagnostic build logs content-script startup plus every page `keydown` and `keyup`, including `key`, `code`, legacy key codes, repeat state, route, and focused element. On Netflix browse routes, a Backspace key held for 2 seconds still requests closing the entire Chrome window. Test only in a browser window you are comfortable closing.

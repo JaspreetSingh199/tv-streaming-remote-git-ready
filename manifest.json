@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "TV Streaming Remote",
-  "version": "1.5.47",
-  "description": "TV-friendly streaming navigation with keyboard focus, player controls, and menu handling.",
+  "version": "1.5.48",
+  "description": "TV-friendly streaming navigation with key-event diagnostics for remote input debugging.",
   "host_permissions": [
     "https://www.netflix.com/*"
   ],

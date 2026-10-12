@@ -40,3 +40,10 @@ For the actual behavior and limitations of the captured version, see the README.
 - Removed the focus/selection restriction: a qualifying hold requests closure regardless of the focused Netflix element.
 - The background worker now closes the whole Chrome window regardless of how many tabs it contains.
 - Static validation only; verify the key events and close behavior in the target kiosk session.
+
+
+## v1.5.48 — Key-event debug build
+
+- Logs when the content script loads and records all keydown/keyup event key values for diagnosing Pulse-Eight/CEC Tray mappings.
+- Logs Backspace hold start, early release, 2-second hold detection, and the window-close response.
+- Backspace hold-exit remains enabled on Netflix browse routes and requests closing the current Chrome window.
