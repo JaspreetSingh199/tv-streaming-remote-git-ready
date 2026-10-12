@@ -3143,9 +3143,13 @@ function onKey(e) {
    if(i && (i.value.trim() || visible(i))) {
      closeSearch(); e.preventDefault(); e.stopImmediatePropagation(); return;
    }
-   // On the bare Netflix browse page, Escape exits Netflix by closing this tab.
-   // Modal, Search, and playback Escape handling has already run above.
-   if (e.key === "Escape" && (location.pathname === "/" || location.pathname === "/browse" || location.pathname.startsWith("/browse/"))) {
+   // On the bare Netflix browse page, Escape exits Netflix. Backspace does
+   // the same only when no real or extension-managed focus is active, so it
+   // won't interfere with poster/card navigation or text entry.
+   const isBareBrowsePage = location.pathname === "/" || location.pathname === "/browse" || location.pathname.startsWith("/browse/");
+   const noFocusedTarget = (!active || active === document.body || active === document.documentElement) && !selected;
+   const shouldCloseBrowse = e.key === "Escape" || (e.key === "Backspace" && noFocusedTarget);
+   if (shouldCloseBrowse && isBareBrowsePage) {
      e.preventDefault(); e.stopImmediatePropagation();
      try {
        chrome.runtime.sendMessage({ type: "HNR_CLOSE_NETFLIX_BROWSE_TAB" }, response => {

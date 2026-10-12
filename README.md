@@ -165,9 +165,14 @@ AI tools were used as development assistance on an existing, outdated codebase. 
 
 ## Version
 
-Current extension version: **1.5.44** (`manifest.json`). This repository captures the personal-use state at that version; it is not a promise of compatibility with future Netflix updates.
+Current extension package version: **1.5.46** (`manifest.json`). This code is an evolving snapshot and is not a promise of compatibility with future Netflix updates.
 
 
 ### Kiosk Escape behavior (v1.5.45)
 
 On the bare Netflix home/browse page, Escape closes the Chrome window if it contains only the Netflix tab, which is intended to return control to the launcher such as Playnite. If that window contains multiple tabs, Escape closes only the Netflix tab. Inside Search, More Info, menus, or playback, Escape keeps its scoped navigation behavior. This requires the `tabs` and `windows` extension permissions.
+
+
+### Backspace kiosk exit behavior (v1.5.46)
+
+On the bare Netflix home/browse page, Backspace closes the kiosk window only when the browser focus is on the document body/document root and the extension has no logical selection. If a card, navigation item, text input, virtual keyboard, menu, modal, or player is active, the existing scoped Backspace behavior remains in place. Escape continues to use the v1.5.45 homepage exit behavior.

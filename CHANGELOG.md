@@ -26,3 +26,9 @@ For the actual behavior and limitations of the captured version, see the README.
 - Escape on the bare Netflix browse/home page now asks the extension service worker to close the Chrome window when Netflix is its only tab (the kiosk/Playnite setup); if other tabs exist, only the Netflix tab is closed.
 - Added the `tabs` and `windows` permissions required for that close behavior. Escape inside search, modals, player controls, and menus retains its existing scoped behavior.
 - Static validation only; live kiosk behavior should be tested on the target machine.
+
+
+## v1.5.46
+
+- On the bare Netflix home/browse page, Backspace now closes the Netflix kiosk window only when neither a DOM element nor the extension's logical selection is focused. Escape retains its existing homepage exit behavior. Search inputs, the virtual keyboard, cards, menus, modals, and playback keep their existing Backspace handling.
+- Static validation only; live kiosk behavior should be tested on the target machine.
