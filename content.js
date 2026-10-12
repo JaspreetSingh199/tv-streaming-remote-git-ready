@@ -3034,7 +3034,10 @@ function hnr1537MoveSearchGrid(event) {
 let hnr1533CloseConfirm = null;
 let hnr1533CloseConfirmSelection = 1; // Start on No for safety.
 const hnr1533IsBrowseHomeRoute = () => location.pathname === "/" || location.pathname === "/browse" || location.pathname.startsWith("/browse/");
-const hnr1533IsBackspaceKey = e => e.key === "Backspace" || e.code === "Backspace" || e.keyCode === 8 || e.which === 8;
+// Pulse-Eight/libCEC reports the Samsung remote's Back key as `Clear` (keyCode 12)
+// on this setup, even though it was configured as Escape in CEC Tray.
+// Treat both standard Backspace and this Clear mapping as the browse-page Back action.
+const hnr1533IsBackspaceKey = e => e.key === "Backspace" || e.code === "Backspace" || e.keyCode === 8 || e.which === 8 || e.key === "Clear" || e.code === "Clear" || e.keyCode === 12 || e.which === 12;
 
 function hnr1533BuildCloseConfirm() {
   if (hnr1533CloseConfirm?.isConnected) return hnr1533CloseConfirm;
@@ -3125,7 +3128,9 @@ function hnr1533HandleCloseConfirmKey(e) {
     if (hnr1533CloseConfirmSelection === 0) hnr1533ConfirmCloseWindow();
     else hnr1533HideCloseConfirm();
   } else if (e.key === "Escape" || e.key === "BrowserBack" || hnr1533IsBackspaceKey(e)) {
-    hnr1533HideCloseConfirm();
+    // A held remote button may generate repeated keydown events after opening
+    // the dialog. Do not let the same held press immediately dismiss the prompt.
+    if (!e.repeat) hnr1533HideCloseConfirm();
   }
   e.preventDefault();
   e.stopImmediatePropagation();
@@ -3137,6 +3142,9 @@ function onKey(e) {
  if(e.altKey||e.ctrlKey||e.metaKey)return;
  if(e.isTrusted) keyPressCount++;
  const active=document.activeElement;
+ if (hnr1533IsBackspaceKey(e)) {
+   console.info("[TV Remote] Back/Clear key received:", { key: e.key, code: e.code, keyCode: e.keyCode, which: e.which, repeat: e.repeat, route: location.pathname, activeElement: active?.tagName || null, inModal: !!activeModal(), playerActive: hnr1533IsPlayerActive(), keyboardVisible: !!hnr1533KeyboardVisible });
+ }
  if (hnr1533HandleCloseConfirmKey(e)) return;
  // If Netflix left a native tray open after the extension exited its mode, let Escape
  // retry native dismissal rather than merely hiding the extension overlay.
@@ -3271,7 +3279,7 @@ function onKey(e) {
  if(handled){e.preventDefault();e.stopImmediatePropagation();}
  if(e.key==="Enter"&&selected&&rendered(selected)&&!isText(selected)){e.preventDefault();e.stopImmediatePropagation();selected.click();}
 }
-console.info("[TV Remote] Content script ready:", location.href);
+console.info("[TV Remote] v1.5.50 loaded (no hold detector):", location.href);
 
 document.addEventListener("keydown", onKey, true);
 document.addEventListener("input", e => {

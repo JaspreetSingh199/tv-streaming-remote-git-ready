@@ -56,3 +56,11 @@ For the actual behavior and limitations of the captured version, see the README.
 - Confirming **Yes** asks the extension service worker to close the current Chrome window, returning to the launcher/Playnite in the kiosk setup.
 - Reduced virtual search keyboard height by shrinking vertical padding, preview area, row gaps, and key height.
 - Removed the previous 2-second Backspace hold detector and per-key debug spam. Static validation only; test on the target Netflix session.
+
+
+## v1.5.50 — Pulse-Eight Clear-key mapping
+
+- Treats the reported remote event `key: "Clear"`, `keyCode: 12` as the homepage Back action, alongside standard Backspace.
+- On Netflix `/`, `/browse`, and `/browse/*`, the key opens the Yes/No close-browser confirmation when the user is not in the More Info modal, search input/virtual keyboard, or player.
+- The close flow has no long-press timer. Startup logs explicitly identify v1.5.50 and key logs report the incoming Back/Clear event plus repeat state.
+- Static validation only; live test with the target CEC key mapping is required.
