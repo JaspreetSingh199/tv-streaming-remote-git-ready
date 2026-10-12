@@ -206,3 +206,7 @@ On Netflix bare home/browse routes, Escape, BrowserBack, Backspace, and the Puls
 ## v1.5.52 — Unified Back keys globally
 
 Escape, Backspace, BrowserBack, and the Pulse-Eight `Clear` key (`keyCode: 12`) are treated as equivalent Back inputs throughout the extension, while each context keeps its own back behavior: search closes, player exits/hides its overlay, native menus close, and the Netflix browse page opens the close-browser confirmation. No hold detector is used.
+
+
+### v1.5.53 confirmed close
+After the user explicitly confirms **Close browser? Yes**, the extension background worker closes the Chrome window containing Netflix regardless of the current Netflix route. It validates the sender origin and does not use a long-press timer.

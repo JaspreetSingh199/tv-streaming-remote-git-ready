@@ -76,3 +76,7 @@ For the actual behavior and limitations of the captured version, see the README.
 - Treat Escape, Backspace, BrowserBack, and Pulse-Eight Clear (`keyCode: 12`) as the same Back action across the extension, not only on the browse page.
 - Preserve context-specific behavior in search, player controls, native audio/episode menus, and modal handling.
 - No hold detection.
+
+## v1.5.53
+- Removed the background service worker browse-route restriction from the confirmed close action. After the user selects Yes, the extension may close its current Chrome window from any Netflix route, including dialogs/player routes.
+- Still validates that the request originates from `https://www.netflix.com`; the close is only requested after explicit confirmation.

@@ -8,9 +8,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   let url;
   try { url = new URL(senderUrl); } catch { sendResponse({ ok: false, reason: "invalid-url" }); return; }
   const isNetflix = url.origin === "https://www.netflix.com";
-  const isBrowsePage = url.pathname === "/" || url.pathname === "/browse" || url.pathname.startsWith("/browse/");
-  if (!Number.isInteger(tabId) || !Number.isInteger(windowId) || !isNetflix || !isBrowsePage) {
-    sendResponse({ ok: false, reason: "not-browse-page" });
+  // The user has explicitly confirmed the close dialog. Allow closing from any Netflix route,
+  // including More Info/player routes where the confirmation may have been opened.
+  if (!Number.isInteger(tabId) || !Number.isInteger(windowId) || !isNetflix) {
+    sendResponse({ ok: false, reason: "not-netflix-window" });
     return;
   }
 
