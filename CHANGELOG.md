@@ -32,3 +32,11 @@ For the actual behavior and limitations of the captured version, see the README.
 
 - On the bare Netflix home/browse page, Backspace now closes the Netflix kiosk window only when neither a DOM element nor the extension's logical selection is focused. Escape retains its existing homepage exit behavior. Search inputs, the virtual keyboard, cards, menus, modals, and playback keep their existing Backspace handling.
 - Static validation only; live kiosk behavior should be tested on the target machine.
+
+
+## v1.5.47
+
+- Added a 2-second Backspace hold detector on Netflix home/browse routes, with console logs for press, release-before-threshold, hold detection, and close response/errors.
+- Removed the focus/selection restriction: a qualifying hold requests closure regardless of the focused Netflix element.
+- The background worker now closes the whole Chrome window regardless of how many tabs it contains.
+- Static validation only; verify the key events and close behavior in the target kiosk session.

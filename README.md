@@ -165,7 +165,7 @@ AI tools were used as development assistance on an existing, outdated codebase. 
 
 ## Version
 
-Current extension package version: **1.5.46** (`manifest.json`). This code is an evolving snapshot and is not a promise of compatibility with future Netflix updates.
+Current extension package version: **1.5.47** (`manifest.json`). This code is an evolving snapshot and is not a promise of compatibility with future Netflix updates.
 
 
 ### Kiosk Escape behavior (v1.5.45)
@@ -176,3 +176,8 @@ On the bare Netflix home/browse page, Escape closes the Chrome window if it cont
 ### Backspace kiosk exit behavior (v1.5.46)
 
 On the bare Netflix home/browse page, Backspace closes the kiosk window only when the browser focus is on the document body/document root and the extension has no logical selection. If a card, navigation item, text input, virtual keyboard, menu, modal, or player is active, the existing scoped Backspace behavior remains in place. Escape continues to use the v1.5.45 homepage exit behavior.
+
+
+### Backspace hold debug behavior (v1.5.47)
+
+On Netflix home/browse routes, holding Backspace for 2 seconds logs the hold detection and requests closure of the entire Chrome window, regardless of current focus or tab count. Short releases log that the hold threshold was not reached. Open DevTools Console to inspect `[TV Remote]` messages. Static validation only; test on the kiosk machine.
