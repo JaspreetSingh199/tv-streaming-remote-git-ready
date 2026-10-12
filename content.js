@@ -918,8 +918,13 @@ function hnr1533VisibleOverlayItems() {
 function hnr1533UpdatePlayerOverlay() {
   const overlay = hnr1533PlayerOverlay;
   if (!overlay) return;
-  const episodeAction = overlay.querySelector('[data-action="episodes"]');
-  if (episodeAction) episodeAction.hidden = !hnr1533HasEpisodeCapability();
+  const hasEpisodes = hnr1533HasEpisodeCapability();
+  // Keep all episode-specific controls together: movies should not show
+  // Episodes, Previous Episode, or Next Episode in the TV Remote overlay.
+  for (const actionId of ["episodes", "previousEpisode", "nextEpisode"]) {
+    const action = overlay.querySelector(`[data-action="${actionId}"]`);
+    if (action) action.hidden = !hasEpisodes;
+  }
   const items = hnr1533VisibleOverlayItems();
   if (items.length) hnr1533PlayerOverlayIndex = Math.max(0, Math.min(items.length - 1, hnr1533PlayerOverlayIndex));
   else hnr1533PlayerOverlayIndex = 0;
@@ -3344,7 +3349,7 @@ function onKey(e) {
  if(handled){e.preventDefault();e.stopImmediatePropagation();}
  if(e.key==="Enter"&&selected&&rendered(selected)&&!isText(selected)){e.preventDefault();e.stopImmediatePropagation();selected.click();}
 }
-console.info("[TV Remote] v1.5.55 loaded (profile picker navigation + global Back keys; no hold detector):", location.href);
+console.info("[TV Remote] v1.5.56 loaded (episode controls hidden for non-episodic titles + profile picker navigation):", location.href);
 
 document.addEventListener("keydown", onKey, true);
 document.addEventListener("input", e => {

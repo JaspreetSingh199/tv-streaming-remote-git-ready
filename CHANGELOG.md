@@ -93,3 +93,9 @@ For the actual behavior and limitations of the captured version, see the README.
 - Arrow navigation moves across profile tiles; Down reaches Manage Profiles when present; Up returns to the nearest profile.
 - Enter/OK activates the focused profile or action.
 - Added console diagnostics for profile-picker navigation.
+
+
+## v1.5.56
+
+- Hide **Episodes**, **Previous Episode**, and **Next Episode** together when the current title is detected as non-episodic.
+- Preserve all three controls for episodic titles.
