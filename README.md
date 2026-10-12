@@ -1,8 +1,8 @@
 # TV Streaming Remote
 
-An experimental Chrome extension for navigating Netflix's web player from the sofa with a TV remote. It is shared for anyone to try and use, as-is.
+A personal, experimental Chrome extension for navigating Netflix's web player from the sofa with a TV remote.
 
-> **Unofficial, as-is project.** Anyone is welcome to use, adapt, and share this project under the terms in [LICENSE](LICENSE). It is not an official Netflix, Samsung, or Pulse-Eight product. Netflix's interface changes frequently, so some controls may stop working when its DOM or player behavior changes. No support or compatibility guarantee is provided.
+> **Personal-use project.** This is an unofficial experiment for one home setup, not an official Netflix, Samsung, or Pulse-Eight product. Netflix's interface changes frequently, so some controls may stop working when its DOM or player behavior changes.
 
 ![TV Streaming Remote icon](icons/icon128.png)
 
@@ -12,7 +12,7 @@ This project started with a simple living-room problem: the computer was connect
 
 The physical remote is a Samsung TV remote. A Pulse-Eight USB-CEC adapter and libCEC/CEC Tray provide the HDMI-CEC bridge and expose remote actions to the host setup as keyboard-like input. This extension runs in Chrome and interprets those key events to navigate Netflix's web interface. It does **not** talk directly to the CEC adapter or implement HDMI-CEC itself.
 
-The codebase began as an **existing but outdated extension** and evolved through many small experiments on the actual TV/PC setup. AI assistance was used to inspect, modify, debug, document, and package parts of that legacy code. This is not a greenfield implementation written entirely from scratch by AI. The repository is shared so other people can use it as-is or adapt it, but inherited code has not received an independent security or provenance audit. Please review it for your own setup before relying on it.
+The codebase began as an **existing but outdated extension** and evolved through many small, test-driven experiments on the actual TV/PC setup. AI assistance was used to inspect, modify, debug, and package parts of that legacy code. This is not a greenfield implementation written entirely from scratch by AI, and inherited code has not received an independent security audit. The project is kept for personal use and learning.
 
 ## Intended setup
 
@@ -155,16 +155,19 @@ The checks cover JavaScript syntax, manifest JSON, and local files referenced by
 - The code in this repository contains no analytics or telemetry uploader. It uses Netflix's page DOM and browser-local state for navigation, capability detection, and recovery.
 - The background service worker handles one narrow request: closing the sender's current Netflix tab when the bare Browse-page Back/Escape action is invoked.
 
-## Use at your own risk
+## Personal-use and affiliation notice
 
-This is an unofficial community-use project, not an official integration. It is not affiliated with, endorsed by, or supported by Netflix, Samsung, or Pulse-Eight. Product and company names are used only to describe the environment this extension was built for.
+This is an unofficial **personal-use project**. It is not affiliated with, endorsed by, or supported by Netflix, Samsung, or Pulse-Eight. Product and company names are used only to describe the environment this extension was built for.
 
-**Anyone may use, copy, adapt, and share this project under the permissive terms in [LICENSE](LICENSE). It is provided “as is”, without warranties or guarantees of any kind.** You are responsible for deciding whether it is suitable for your setup and for any consequences of using or modifying it. There is no promise of maintenance, support, security, or compatibility with future Netflix updates.
+AI tools were used as development assistance on an existing, outdated codebase. The result contains legacy code, experimental changes, and behavior that has not been independently audited. Do not assume that AI assistance means the project is correct, secure, or production-ready.
 
-AI tools were used as development assistance on an existing, outdated codebase. The result contains legacy code, experimental changes, and behavior that has not been independently audited. AI assistance does not mean the project is correct, secure, or production-ready.
-
-The repository's history includes an existing extension that was adapted. Its original provenance and license have not been independently verified; any third-party or inherited material remains subject to rights held by its respective owners. Before redistributing a modified build or using it commercially, check that you have the necessary rights to all code and assets. Do not include private browser data, cookies, authorization headers, or Netflix session tokens in issues or commits.
+**No open-source license is granted by this repository.** It is kept for personal use and documentation of this setup; do not redistribute or reuse the code without the owner's permission. If you intend to publish the repository, check the code and any included assets for rights and licensing first.
 
 ## Version
 
-Current extension version: **1.5.44** (`manifest.json`). This repository captures the code at that version; it is not a promise of compatibility with future Netflix updates.
+Current extension version: **1.5.44** (`manifest.json`). This repository captures the personal-use state at that version; it is not a promise of compatibility with future Netflix updates.
+
+
+### Kiosk Escape behavior (v1.5.45)
+
+On the bare Netflix home/browse page, Escape closes the Chrome window if it contains only the Netflix tab, which is intended to return control to the launcher such as Playnite. If that window contains multiple tabs, Escape closes only the Netflix tab. Inside Search, More Info, menus, or playback, Escape keeps its scoped navigation behavior. This requires the `tabs` and `windows` extension permissions.

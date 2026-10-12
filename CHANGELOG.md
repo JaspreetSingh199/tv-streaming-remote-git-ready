@@ -1,11 +1,5 @@
 # Changelog
 
-## Repository policy update — use as-is
-
-- Updated the project story and usage notice: the repository is shared for anyone to use, adapt, and share under the included permissive license, as-is and without warranty.
-- Clarified AI assistance on an existing, outdated codebase and the lack of independent security/provenance review.
-- Added a `LICENSE` file with an express limitation for inherited or third-party material whose rights may differ.
-
 This is a condensed milestone history. Many intermediary builds were experiments; notes describe intent and do not imply that every behavior is fully reliable against the live Netflix site.
 
 ## 1.5.44 — Generic branding and Back label
@@ -25,3 +19,10 @@ This is a condensed milestone history. Many intermediary builds were experiments
 - **Generic extension icon:** included 16, 32, 48, and 128-pixel PNG icons.
 
 For the actual behavior and limitations of the captured version, see the README.
+
+
+## v1.5.45
+
+- Escape on the bare Netflix browse/home page now asks the extension service worker to close the Chrome window when Netflix is its only tab (the kiosk/Playnite setup); if other tabs exist, only the Netflix tab is closed.
+- Added the `tabs` and `windows` permissions required for that close behavior. Escape inside search, modals, player controls, and menus retains its existing scoped behavior.
+- Static validation only; live kiosk behavior should be tested on the target machine.
