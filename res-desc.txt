@@ -1,0 +1,10 @@
+### TV Streaming Remote — AI-Assisted HTPC Experiment
+*Personal project | JavaScript, Chrome Extensions (Manifest V3), DOM automation, Windows HTPC*
+
+- Planned an AI-assisted solution with ChatGPT to enable sofa-based Netflix navigation using a Samsung TV remote and a Pulse-Eight USB-CEC adapter.
+- Evaluated an existing legacy extension and collaboratively selected an iterative adaptation strategy rather than a greenfield rewrite.
+- Developed and refined remote-driven focus navigation, an on-screen search keyboard, playback controls, contextual Back handling, and safe kiosk-window exit confirmation.
+- Used real device behavior, browser logs, and Netflix DOM inspection to diagnose input-mapping and profile-picker navigation issues.
+- Validated the final controls on the target HTPC and documented limitations, implementation decisions, and static checks.
+
+**AI workflow:** Used ChatGPT as a planning, coding, and debugging partner; reviewed proposed approaches and verified behavior against the real setup.
