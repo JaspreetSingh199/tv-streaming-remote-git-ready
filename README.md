@@ -214,3 +214,7 @@ After the user explicitly confirms **Close browser? Yes**, the extension backgro
 
 ### Profile picker (v1.5.54)
 On Netflix’s “Who’s watching?” screen, use a directional key to focus the profile tiles, Left/Right to move across choices, and Enter/OK to activate the focused profile or action.
+
+
+### v1.5.55 profile picker
+On Netflix’s “Who’s watching?” screen, Down/Right from an unfocused state starts at the first profile. Left/Right move across profile buttons, Down reaches Manage Profiles when detected, Up returns to the nearest profile, and Enter/OK activates the focused button. Console logs begin with `[TV Remote] Profile picker navigation`.

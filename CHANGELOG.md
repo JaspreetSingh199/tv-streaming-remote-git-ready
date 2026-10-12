@@ -86,3 +86,10 @@ For the actual behavior and limitations of the captured version, see the README.
 - Added dedicated Netflix “Who’s watching?” profile-picker navigation using profile tile and Manage Profiles buttons.
 - Directional keys enter and move focus among profile tiles, Add Profile, and Manage Profiles; Enter/OK activates the focused option.
 - No hold detection added; existing back-key and close-confirmation behavior retained.
+
+
+## v1.5.55
+- Added a dedicated handler for Netflix profile picker tiles using `data-uia="profile-selector"`.
+- Arrow navigation moves across profile tiles; Down reaches Manage Profiles when present; Up returns to the nearest profile.
+- Enter/OK activates the focused profile or action.
+- Added console diagnostics for profile-picker navigation.

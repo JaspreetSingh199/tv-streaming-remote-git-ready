@@ -1,6 +1,6 @@
 (() => {
 "use strict";
-if (window.__HNR1543) return;
+if (window.__HNR1555) return;
 window.__HNR1543 = true;
 
 const S = {
@@ -3137,6 +3137,59 @@ function hnr1533HandleCloseConfirmKey(e) {
   return true;
 }
 
+
+function hnr1533ProfilePickerTargets() {
+  const root = document.querySelector('[data-uia="profile-selector"]');
+  if (!root || !rendered(root)) return null;
+  const profiles = [...root.querySelectorAll('button[data-uia^="profile-selector+tile-"], button[data-uia="profile-selector+add"]')].filter(rendered);
+  if (!profiles.length) return null;
+  const manage = [...document.querySelectorAll('button,a,[role="button"],[tabindex]')]
+    .filter(el => rendered(el) && norm(el.innerText) === 'Manage Profiles' && !root.contains(el))
+    .sort((a,b) => a.getBoundingClientRect().width*a.getBoundingClientRect().height - b.getBoundingClientRect().width*b.getBoundingClientRect().height)[0] || null;
+  return { root, profiles, manage };
+}
+function hnr1533HandleProfilePicker(e) {
+  const picker = hnr1533ProfilePickerTargets();
+  if (!picker) return false;
+  const { profiles, manage } = picker;
+  const targets = manage ? [...profiles, manage] : profiles;
+  const active = document.activeElement;
+  const idx = targets.indexOf(active);
+  const selectedIdx = targets.indexOf(selected);
+  const currentIdx = idx >= 0 ? idx : selectedIdx;
+  const arrows = ['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'];
+  if (arrows.includes(e.key)) {
+    let target = null;
+    if (currentIdx < 0) {
+      // Netflix often leaves DOM focus on its logo; start on the first profile.
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') target = profiles[0];
+      else if (e.key === 'ArrowUp' && manage) target = manage;
+      else target = profiles[0];
+    } else {
+      const current = targets[currentIdx];
+      if (e.key === 'ArrowDown' && profiles.includes(current) && manage) target = manage;
+      else if (e.key === 'ArrowUp' && current === manage) {
+        const c = center(current);
+        target = profiles.slice().sort((a,b) => Math.abs(center(a).x-c.x)-Math.abs(center(b).x-c.x))[0];
+      } else {
+        target = nearest(current, targets, e.key);
+        if (!target && e.key === 'ArrowLeft') target = targets[Math.max(0,currentIdx-1)];
+        if (!target && e.key === 'ArrowRight') target = targets[Math.min(targets.length-1,currentIdx+1)];
+      }
+    }
+    if (target) focus(target);
+    e.preventDefault(); e.stopImmediatePropagation();
+    console.info('[TV Remote] Profile picker navigation', { key:e.key, target: target ? norm(target.innerText) : null, profileCount: profiles.length, manageFound: !!manage });
+    return true;
+  }
+  if (e.key === 'Enter' || e.key === ' ') {
+    const target = currentIdx >= 0 ? targets[currentIdx] : (profiles[0] || null);
+    if (target) { e.preventDefault(); e.stopImmediatePropagation(); target.click(); console.info('[TV Remote] Profile picker activated:', norm(target.innerText)); }
+    return true;
+  }
+  return false;
+}
+
 function onKey(e) {
  if (hnr1533DispatchingNativeShortcut || hnr1533BypassKeyRouter) return;
  if(e.altKey||e.ctrlKey||e.metaKey)return;
@@ -3146,6 +3199,8 @@ function onKey(e) {
    console.info("[TV Remote] Back/Clear key received:", { key: e.key, code: e.code, keyCode: e.keyCode, which: e.which, repeat: e.repeat, route: location.pathname, activeElement: active?.tagName || null, inModal: !!activeModal(), playerActive: hnr1533IsPlayerActive(), keyboardVisible: !!hnr1533KeyboardVisible });
  }
  if (hnr1533HandleCloseConfirmKey(e)) return;
+ // Dedicated Netflix profile-picker navigation must run before generic browse logic.
+ if (hnr1533HandleProfilePicker(e)) return;
  // If Netflix left a native tray open after the extension exited its mode, let Escape
  // retry native dismissal rather than merely hiding the extension overlay.
  if (location.pathname.startsWith('/watch/') && (e.key === 'Escape' || e.key === 'BrowserBack')) {
@@ -3289,7 +3344,7 @@ function onKey(e) {
  if(handled){e.preventDefault();e.stopImmediatePropagation();}
  if(e.key==="Enter"&&selected&&rendered(selected)&&!isText(selected)){e.preventDefault();e.stopImmediatePropagation();selected.click();}
 }
-console.info("[TV Remote] v1.5.52 loaded (Escape + Backspace + Clear unified globally; no hold detector):", location.href);
+console.info("[TV Remote] v1.5.55 loaded (profile picker navigation + global Back keys; no hold detector):", location.href);
 
 document.addEventListener("keydown", onKey, true);
 document.addEventListener("input", e => {
