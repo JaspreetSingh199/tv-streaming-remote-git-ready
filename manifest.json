@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "TV Streaming Remote",
-  "version": "1.5.50",
-  "description": "TV-friendly Netflix navigation with Clear/Back close confirmation and a compact search keyboard.",
+  "version": "1.5.51",
+  "description": "TV-friendly Netflix navigation with Clear/Backspace/Escape close confirmation and a compact search keyboard.",
   "host_permissions": [
     "https://www.netflix.com/*"
   ],

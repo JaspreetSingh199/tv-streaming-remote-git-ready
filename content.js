@@ -3038,6 +3038,7 @@ const hnr1533IsBrowseHomeRoute = () => location.pathname === "/" || location.pat
 // on this setup, even though it was configured as Escape in CEC Tray.
 // Treat both standard Backspace and this Clear mapping as the browse-page Back action.
 const hnr1533IsBackspaceKey = e => e.key === "Backspace" || e.code === "Backspace" || e.keyCode === 8 || e.which === 8 || e.key === "Clear" || e.code === "Clear" || e.keyCode === 12 || e.which === 12;
+const hnr1533IsBackOrEscapeKey = e => e.key === "Escape" || e.code === "Escape" || e.keyCode === 27 || e.which === 27 || e.key === "BrowserBack" || hnr1533IsBackspaceKey(e);
 
 function hnr1533BuildCloseConfirm() {
   if (hnr1533CloseConfirm?.isConnected) return hnr1533CloseConfirm;
@@ -3128,8 +3129,7 @@ function hnr1533HandleCloseConfirmKey(e) {
     if (hnr1533CloseConfirmSelection === 0) hnr1533ConfirmCloseWindow();
     else hnr1533HideCloseConfirm();
   } else if (e.key === "Escape" || e.key === "BrowserBack" || hnr1533IsBackspaceKey(e)) {
-    // A held remote button may generate repeated keydown events after opening
-    // the dialog. Do not let the same held press immediately dismiss the prompt.
+    // Repeated keydown events from the remote should not immediately dismiss the prompt.
     if (!e.repeat) hnr1533HideCloseConfirm();
   }
   e.preventDefault();
@@ -3220,6 +3220,16 @@ function onKey(e) {
    return;
  }
 
+ // On the bare Browse/Home page, treat either Escape or the remote's Clear/Backspace
+ // as the same Back action. Search, playback, and More Info have already taken priority.
+ if (hnr1533IsBrowseHomeRoute() && !hnr1533IsPlayerActive() && !activeModal() &&
+     !hnr1533KeyboardVisible && hnr1533IsBackOrEscapeKey(e)) {
+   e.preventDefault();
+   e.stopImmediatePropagation();
+   hnr1533ShowCloseConfirm(e.key || (hnr1533IsBackspaceKey(e) ? "Clear/Backspace" : "Escape"));
+   return;
+ }
+
  // Netflix search results use a grid rather than the carousel-row structure
  // expected by moveGrid(). Handle that route explicitly so arrow input moves
  // poster focus instead of scrolling the browser page.
@@ -3279,7 +3289,7 @@ function onKey(e) {
  if(handled){e.preventDefault();e.stopImmediatePropagation();}
  if(e.key==="Enter"&&selected&&rendered(selected)&&!isText(selected)){e.preventDefault();e.stopImmediatePropagation();selected.click();}
 }
-console.info("[TV Remote] v1.5.50 loaded (no hold detector):", location.href);
+console.info("[TV Remote] v1.5.51 loaded (Escape + Clear/Backspace; no hold detector):", location.href);
 
 document.addEventListener("keydown", onKey, true);
 document.addEventListener("input", e => {

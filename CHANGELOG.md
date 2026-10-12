@@ -64,3 +64,9 @@ For the actual behavior and limitations of the captured version, see the README.
 - On Netflix `/`, `/browse`, and `/browse/*`, the key opens the Yes/No close-browser confirmation when the user is not in the More Info modal, search input/virtual keyboard, or player.
 - The close flow has no long-press timer. Startup logs explicitly identify v1.5.50 and key logs report the incoming Back/Clear event plus repeat state.
 - Static validation only; live test with the target CEC key mapping is required.
+
+
+## v1.5.51
+- Unified Escape, BrowserBack, Backspace, and Clear key detection on the bare Netflix home/browse page.
+- Moved the browse exit prompt earlier in key routing, after search/player/modal handlers, so page focus or an anchor target does not prevent the prompt.
+- No hold detection or timer.

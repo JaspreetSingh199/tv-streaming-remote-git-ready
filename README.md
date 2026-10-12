@@ -196,3 +196,8 @@ On Netflix home/browse tabs, the remote's Backspace mapping opens a Yes/No confi
 ### v1.5.50 — Pulse-Eight `Clear` key mapping
 
 The Samsung remote's Back button may arrive from CEC Tray/libCEC as `key: "Clear"`, `keyCode: 12`, not as a normal `Backspace` (`keyCode: 8`). v1.5.50 recognizes either mapping as Back on Netflix browse/home routes and opens the Yes/No close-browser confirmation outside More Info, search input/keyboard, and playback. There is no hold timer in this build. The console startup line is `[TV Remote] v1.5.50 loaded (no hold detector): ...`; Back-key diagnostics start with `[TV Remote] Back/Clear key received:`. If a hold-detection log still appears, verify that only v1.5.50 is enabled and inspect the exact log prefix/version.
+
+
+### v1.5.51 — Escape and Clear/Backspace parity
+
+On Netflix bare home/browse routes, Escape, BrowserBack, Backspace, and the Pulse-Eight `Clear` mapping (keyCode 12) all open the same Yes/No close-browser confirmation. This check runs before generic browse-page navigation but after the dedicated search, player, and More Info handlers, so those contexts retain their existing behavior. No hold timer is used.
