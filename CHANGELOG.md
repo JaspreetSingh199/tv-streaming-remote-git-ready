@@ -80,3 +80,9 @@ For the actual behavior and limitations of the captured version, see the README.
 ## v1.5.53
 - Removed the background service worker browse-route restriction from the confirmed close action. After the user selects Yes, the extension may close its current Chrome window from any Netflix route, including dialogs/player routes.
 - Still validates that the request originates from `https://www.netflix.com`; the close is only requested after explicit confirmation.
+
+
+## v1.5.54
+- Added dedicated Netflix “Who’s watching?” profile-picker navigation using profile tile and Manage Profiles buttons.
+- Directional keys enter and move focus among profile tiles, Add Profile, and Manage Profiles; Enter/OK activates the focused option.
+- No hold detection added; existing back-key and close-confirmation behavior retained.

@@ -210,3 +210,7 @@ Escape, Backspace, BrowserBack, and the Pulse-Eight `Clear` key (`keyCode: 12`) 
 
 ### v1.5.53 confirmed close
 After the user explicitly confirms **Close browser? Yes**, the extension background worker closes the Chrome window containing Netflix regardless of the current Netflix route. It validates the sender origin and does not use a long-press timer.
+
+
+### Profile picker (v1.5.54)
+On Netflix’s “Who’s watching?” screen, use a directional key to focus the profile tiles, Left/Right to move across choices, and Enter/OK to activate the focused profile or action.
