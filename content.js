@@ -358,7 +358,7 @@ function handleModal(e, modal) {
   const active = selectedInside ? selected : domActive;
   const inside = !!active && modal.contains(active);
 
-  if (e.key === "Escape" || e.key === "BrowserBack" || e.key === "Backspace") {
+  if (hnr1533IsBackOrEscapeKey(e)) {
     if (close && activateModalClose(modal, close)) {
       status("Closing More Info");
       // Some Netflix click handlers schedule the state update asynchronously.
@@ -2521,7 +2521,7 @@ function hnr1533HandleNativeAudioKey(e) {
     current = rows[Math.max(0, Math.min(rows.length - 1, hnr1533NativeAudioIndex))] || rows[0];
     hnr1533FocusNativeAudioOption(current);
   }
-  if (e.key === 'Escape' || e.key === 'BrowserBack' || e.key === 'ArrowLeft') {
+  if (hnr1533IsBackOrEscapeKey(e) || e.key === 'ArrowLeft') {
     hnr1533ExitNativeAudio(true);
     e.preventDefault(); e.stopImmediatePropagation(); return true;
   }
@@ -2602,7 +2602,7 @@ function hnr1533PlayerNavigate(e) {
       }
       e.preventDefault(); e.stopImmediatePropagation(); return true;
     }
-    if (e.key === "Escape" || e.key === "BrowserBack") {
+    if (hnr1533IsBackOrEscapeKey(e)) {
       hnr1533ExitNativeEpisodes(true);
       e.preventDefault(); e.stopImmediatePropagation(); return true;
     }
@@ -2817,7 +2817,7 @@ function closeMenu(trigger, root) {
 function handleMenu(e) {
   const root = profileRoot(), trigger = expandedTrigger();
   if (!root && !trigger) return false;
-  if (e.key === "Escape" || e.key === "BrowserBack" || e.key === "Backspace") {
+  if (hnr1533IsBackOrEscapeKey(e)) {
     const closed = closeMenu(trigger, root);
     if (closed) { e.preventDefault(); e.stopImmediatePropagation(); }
     return true;
@@ -3128,7 +3128,7 @@ function hnr1533HandleCloseConfirmKey(e) {
   } else if (e.key === "Enter" || e.key === " ") {
     if (hnr1533CloseConfirmSelection === 0) hnr1533ConfirmCloseWindow();
     else hnr1533HideCloseConfirm();
-  } else if (e.key === "Escape" || e.key === "BrowserBack" || hnr1533IsBackspaceKey(e)) {
+  } else if (hnr1533IsBackOrEscapeKey(e) || hnr1533IsBackspaceKey(e)) {
     // Repeated keydown events from the remote should not immediately dismiss the prompt.
     if (!e.repeat) hnr1533HideCloseConfirm();
   }
@@ -3166,10 +3166,10 @@ function onKey(e) {
      if(key)hnr1533ActivateKey(key.dataset.key);
      e.preventDefault();e.stopImmediatePropagation();return;
    }
-   if(e.key==="Escape"||e.key==="BrowserBack") {
+   if(hnr1533IsBackOrEscapeKey(e)) {
      closeSearch();e.preventDefault();e.stopImmediatePropagation();return;
    }
-   if(e.key==="Backspace") {
+   if(hnr1533IsBackspaceKey(e) && e.key !== "Clear") {
      hnr1533ActivateKey("⌫");e.preventDefault();e.stopImmediatePropagation();return;
    }
  }
@@ -3177,7 +3177,7 @@ function onKey(e) {
  // Search is its own region, except an overlay takes priority below.
  if(isSearch(active) && !activeModal()) {
   if(!hnr1533KeyboardVisible) hnr1533ShowKeyboard(active);
-  if(e.key==="Escape"||e.key==="BrowserBack"||e.key==="Backspace") {
+  if(hnr1533IsBackOrEscapeKey(e)) {
     closeSearch();e.preventDefault();e.stopImmediatePropagation();return;
   }
   if(e.key==="ArrowDown"){const c=firstCard()||document.querySelector('[data-uia="search-suggestion-item-link"]');if(c)focus(c);e.preventDefault();e.stopImmediatePropagation();}
@@ -3187,7 +3187,7 @@ function onKey(e) {
  // Actual playback has priority over generic page menus; once active, the
  // yellow-ring controller owns arrows/OK until Back exits the player.
  if(hnr1533IsPlayerActive()) {
-   if(e.key==="Escape"||e.key==="BrowserBack") {
+   if(hnr1533IsBackOrEscapeKey(e)) {
      if (hnr1533NativeAudioMode) {
        hnr1533ExitNativeAudio(true);
        e.preventDefault();e.stopImmediatePropagation();return;
@@ -3259,7 +3259,7 @@ function onKey(e) {
      return;
    }
  }
- if(e.key==="Escape"||e.key==="BrowserBack"||hnr1533IsBackspaceKey(e)) {
+ if(hnr1533IsBackOrEscapeKey(e)||hnr1533IsBackspaceKey(e)) {
    const i=searchInput();
    if(i && (i.value.trim() || visible(i))) {
      closeSearch(); e.preventDefault(); e.stopImmediatePropagation(); return;
@@ -3272,7 +3272,7 @@ function onKey(e) {
      hnr1533ShowCloseConfirm(e.key || (hnr1533IsBackspaceKey(e) ? "Backspace" : "Back"));
      return;
    }
-   if (e.key === "Escape") { e.preventDefault(); e.stopImmediatePropagation(); }
+   if (hnr1533IsBackOrEscapeKey(e)) { e.preventDefault(); e.stopImmediatePropagation(); }
    return;
  }
  let handled=false;
@@ -3289,7 +3289,7 @@ function onKey(e) {
  if(handled){e.preventDefault();e.stopImmediatePropagation();}
  if(e.key==="Enter"&&selected&&rendered(selected)&&!isText(selected)){e.preventDefault();e.stopImmediatePropagation();selected.click();}
 }
-console.info("[TV Remote] v1.5.51 loaded (Escape + Clear/Backspace; no hold detector):", location.href);
+console.info("[TV Remote] v1.5.52 loaded (Escape + Backspace + Clear unified globally; no hold detector):", location.href);
 
 document.addEventListener("keydown", onKey, true);
 document.addEventListener("input", e => {

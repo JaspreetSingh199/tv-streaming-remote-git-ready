@@ -70,3 +70,9 @@ For the actual behavior and limitations of the captured version, see the README.
 - Unified Escape, BrowserBack, Backspace, and Clear key detection on the bare Netflix home/browse page.
 - Moved the browse exit prompt earlier in key routing, after search/player/modal handlers, so page focus or an anchor target does not prevent the prompt.
 - No hold detection or timer.
+
+
+## 1.5.52
+- Treat Escape, Backspace, BrowserBack, and Pulse-Eight Clear (`keyCode: 12`) as the same Back action across the extension, not only on the browse page.
+- Preserve context-specific behavior in search, player controls, native audio/episode menus, and modal handling.
+- No hold detection.
