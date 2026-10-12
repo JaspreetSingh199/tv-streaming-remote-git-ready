@@ -47,3 +47,12 @@ For the actual behavior and limitations of the captured version, see the README.
 - Logs when the content script loads and records all keydown/keyup event key values for diagnosing Pulse-Eight/CEC Tray mappings.
 - Logs Backspace hold start, early release, 2-second hold detection, and the window-close response.
 - Backspace hold-exit remains enabled on Netflix browse routes and requests closing the current Chrome window.
+
+
+## v1.5.49 — Back confirmation and compact search keyboard
+
+- Removed the Backspace long-press timer. On Netflix home/browse tabs, Backspace (the Samsung remote's current mapping), Escape, or Browser Back now opens a Yes/No confirmation instead of immediately closing the Chrome window.
+- The prompt defaults to **No** and can be operated with arrows + Enter/OK; Backspace/Escape dismiss it. More Info modals, search input/keyboard, menus, and the player retain priority and do not invoke the close prompt.
+- Confirming **Yes** asks the extension service worker to close the current Chrome window, returning to the launcher/Playnite in the kiosk setup.
+- Reduced virtual search keyboard height by shrinking vertical padding, preview area, row gaps, and key height.
+- Removed the previous 2-second Backspace hold detector and per-key debug spam. Static validation only; test on the target Netflix session.

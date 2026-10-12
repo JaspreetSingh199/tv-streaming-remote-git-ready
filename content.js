@@ -496,18 +496,18 @@ function hnr1533BuildKeyboard() {
   const css = document.createElement("style");
   css.id = "hnr1533-keyboard-css";
   css.textContent = `
-    #hnr1533-keyboard{position:fixed;z-index:2147483647;left:50%;bottom:3vh;transform:translateX(-50%);width:min(1020px,94vw);padding:18px 20px 14px;background:linear-gradient(155deg,rgba(29,29,29,.985),rgba(7,7,7,.985));border:1px solid rgba(255,255,255,.22);border-top:3px solid #e50914;border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.72),inset 0 1px 0 rgba(255,255,255,.06);color:#fff;font:600 16px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+    #hnr1533-keyboard{position:fixed;z-index:2147483647;left:50%;bottom:2vh;transform:translateX(-50%);width:min(1020px,94vw);padding:11px 16px 9px;background:linear-gradient(155deg,rgba(29,29,29,.985),rgba(7,7,7,.985));border:1px solid rgba(255,255,255,.22);border-top:3px solid #e50914;border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.72),inset 0 1px 0 rgba(255,255,255,.06);color:#fff;font:600 16px/1.2 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
     #hnr1533-keyboard[hidden]{display:none!important}
-    #hnr1533-keyboard .hnr1533-kb-header{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 13px;padding:0 2px 12px;border-bottom:1px solid rgba(255,255,255,.12)}
+    #hnr1533-keyboard .hnr1533-kb-header{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:0 0 7px;padding:0 2px 7px;border-bottom:1px solid rgba(255,255,255,.12)}
     #hnr1533-keyboard .hnr1533-kb-brand{display:flex;align-items:center;gap:10px;min-width:0}
-    #hnr1533-keyboard .hnr1533-kb-mark{width:34px;height:34px;flex:0 0 34px;display:flex;align-items:center;justify-content:center;border-radius:9px;background:#e50914;color:#fff;font-size:20px;font-weight:900;box-shadow:0 4px 14px rgba(229,9,20,.25)}
+    #hnr1533-keyboard .hnr1533-kb-mark{width:28px;height:28px;flex:0 0 28px;display:flex;align-items:center;justify-content:center;border-radius:9px;background:#e50914;color:#fff;font-size:17px;font-weight:900;box-shadow:0 4px 14px rgba(229,9,20,.25)}
     #hnr1533-keyboard .hnr1533-kb-title{font-size:14px;letter-spacing:.04em;font-weight:800;margin:0}
     #hnr1533-keyboard .hnr1533-kb-subtitle{font-size:10px;letter-spacing:.16em;font-weight:800;color:#aaa;margin-top:4px}
-    #hnr1533-keyboard .hnr1533-kb-preview{font-size:22px;line-height:1.25;min-height:28px;max-height:58px;overflow:hidden;overflow-wrap:anywhere;background:rgba(255,255,255,.075);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:10px 13px;margin-bottom:14px;color:#fff;box-shadow:inset 0 1px 4px rgba(0,0,0,.35)}
-    #hnr1533-keyboard .hnr1533-kb-row{display:flex;gap:8px;justify-content:center;margin:8px 0}
+    #hnr1533-keyboard .hnr1533-kb-preview{font-size:18px;line-height:1.15;min-height:22px;max-height:42px;overflow:hidden;overflow-wrap:anywhere;background:rgba(255,255,255,.075);border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:6px 10px;margin-bottom:8px;color:#fff;box-shadow:inset 0 1px 4px rgba(0,0,0,.35)}
+    #hnr1533-keyboard .hnr1533-kb-row{display:flex;gap:6px;justify-content:center;margin:4px 0}
     #hnr1533-keyboard .hnr1533-kb-row:nth-child(3){padding-left:4.5%;padding-right:0}
     #hnr1533-keyboard .hnr1533-kb-row:nth-child(4){padding-left:8%;padding-right:8%}
-    #hnr1533-keyboard .hnr1533-kb-key{flex:1;min-width:0;height:52px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.16);border-radius:9px;background:linear-gradient(160deg,rgba(66,66,66,.94),rgba(37,37,37,.98));color:#f4f4f4;font-size:17px;font-weight:650;letter-spacing:.015em;user-select:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.045);transition:background .12s ease,border-color .12s ease,transform .12s ease}
+    #hnr1533-keyboard .hnr1533-kb-key{flex:1;min-width:0;height:40px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.16);border-radius:9px;background:linear-gradient(160deg,rgba(66,66,66,.94),rgba(37,37,37,.98));color:#f4f4f4;font-size:16px;font-weight:650;letter-spacing:.015em;user-select:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.045);transition:background .12s ease,border-color .12s ease,transform .12s ease}
     #hnr1533-keyboard .hnr1533-kb-key.wide{flex:1.8;font-size:14px}
     #hnr1533-keyboard .hnr1533-kb-key[data-key="Space"]{flex:4.2;font-size:14px;color:#ddd}
     #hnr1533-keyboard .hnr1533-kb-key[data-key="Clear"]{flex:1.5}
@@ -515,10 +515,10 @@ function hnr1533BuildKeyboard() {
     #hnr1533-keyboard .hnr1533-kb-key[data-key="⌫"]{font-size:22px}
     #hnr1533-keyboard .hnr1533-kb-key.selected{background:#f6f6f6;color:#111;border-color:#fff;outline:3px solid #fff;outline-offset:2px;box-shadow:0 0 0 2px rgba(0,0,0,.9),0 0 20px rgba(255,255,255,.18);transform:translateY(-1px);z-index:1}
     #hnr1533-keyboard .hnr1533-kb-key[data-key="Done"].selected{background:#fff;color:#111}
-    #hnr1533-keyboard .hnr1533-kb-hint{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;font-size:11px;color:#bdbdbd;text-align:center;margin-top:13px;padding-top:10px;border-top:1px solid rgba(255,255,255,.1)}
+    #hnr1533-keyboard .hnr1533-kb-hint{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 12px;font-size:10px;color:#bdbdbd;text-align:center;margin-top:7px;padding-top:6px;border-top:1px solid rgba(255,255,255,.1)}
     #hnr1533-keyboard .hnr1533-kb-hint strong{color:#fff;font-weight:750}
-    @media(max-width:900px){#hnr1533-keyboard{width:95vw;padding:12px 12px 10px}#hnr1533-keyboard .hnr1533-kb-row{gap:5px;margin:6px 0}#hnr1533-keyboard .hnr1533-kb-key{height:44px;font-size:15px}}
-    @media(max-height:650px){#hnr1533-keyboard{bottom:1vh;padding:9px 12px 8px}#hnr1533-keyboard .hnr1533-kb-header{margin-bottom:7px;padding-bottom:7px}#hnr1533-keyboard .hnr1533-kb-mark{width:27px;height:27px;flex-basis:27px;font-size:16px}#hnr1533-keyboard .hnr1533-kb-preview{font-size:18px;min-height:22px;padding:6px 9px;margin-bottom:8px}#hnr1533-keyboard .hnr1533-kb-key{height:35px;font-size:14px}#hnr1533-keyboard .hnr1533-kb-row{gap:4px;margin:4px 0}#hnr1533-keyboard .hnr1533-kb-hint{margin-top:7px;padding-top:6px}}
+    @media(max-width:900px){#hnr1533-keyboard{width:95vw;padding:9px 10px 7px}#hnr1533-keyboard .hnr1533-kb-row{gap:4px;margin:3px 0}#hnr1533-keyboard .hnr1533-kb-key{height:36px;font-size:14px}}
+    @media(max-height:650px){#hnr1533-keyboard{bottom:1vh;padding:7px 10px 6px}#hnr1533-keyboard .hnr1533-kb-header{margin-bottom:5px;padding-bottom:5px}#hnr1533-keyboard .hnr1533-kb-mark{width:24px;height:24px;flex-basis:24px;font-size:14px}#hnr1533-keyboard .hnr1533-kb-preview{font-size:16px;min-height:19px;padding:4px 8px;margin-bottom:5px}#hnr1533-keyboard .hnr1533-kb-key{height:31px;font-size:13px}#hnr1533-keyboard .hnr1533-kb-row{gap:3px;margin:2px 0}#hnr1533-keyboard .hnr1533-kb-hint{margin-top:5px;padding-top:4px;font-size:9px}}
   `;
   document.documentElement.append(css);
   const root = document.createElement("div");
@@ -3030,11 +3030,114 @@ function hnr1537MoveSearchGrid(event) {
   return true;
 }
 
+// Browse-page Back confirmation. The Samsung remote's Back button is mapped to Backspace.
+let hnr1533CloseConfirm = null;
+let hnr1533CloseConfirmSelection = 1; // Start on No for safety.
+const hnr1533IsBrowseHomeRoute = () => location.pathname === "/" || location.pathname === "/browse" || location.pathname.startsWith("/browse/");
+const hnr1533IsBackspaceKey = e => e.key === "Backspace" || e.code === "Backspace" || e.keyCode === 8 || e.which === 8;
+
+function hnr1533BuildCloseConfirm() {
+  if (hnr1533CloseConfirm?.isConnected) return hnr1533CloseConfirm;
+  const style = document.createElement("style");
+  style.id = "hnr1533-close-confirm-css";
+  style.textContent = `
+    #hnr1533-close-confirm{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;padding:22px;background:rgba(0,0,0,.68);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);font:600 16px/1.35 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#fff}
+    #hnr1533-close-confirm[hidden]{display:none!important}
+    #hnr1533-close-confirm .hnr1533-close-card{width:min(460px,94vw);padding:25px 26px 23px;border:1px solid rgba(255,255,255,.18);border-top:4px solid #e50914;border-radius:18px;background:linear-gradient(150deg,#222,#090909);box-shadow:0 24px 80px rgba(0,0,0,.76);text-align:center}
+    #hnr1533-close-confirm .hnr1533-close-eyebrow{color:#aaa;font-size:10px;font-weight:850;letter-spacing:.18em;text-transform:uppercase;margin-bottom:9px}
+    #hnr1533-close-confirm .hnr1533-close-title{font-size:27px;font-weight:850;line-height:1.1;margin:0 0 10px}
+    #hnr1533-close-confirm .hnr1533-close-copy{font-size:14px;font-weight:500;color:#c9c9c9;margin:0 0 23px}
+    #hnr1533-close-confirm .hnr1533-close-actions{display:flex;justify-content:center;gap:14px}
+    #hnr1533-close-confirm .hnr1533-close-choice{min-width:128px;height:52px;border:1px solid rgba(255,255,255,.22);border-radius:10px;background:linear-gradient(160deg,#393939,#222);color:#f8f8f8;font:800 16px system-ui,sans-serif;cursor:pointer;outline:none}
+    #hnr1533-close-confirm .hnr1533-close-choice.selected{background:#f6f6f6;border-color:#fff;color:#111;outline:3px solid #fff;outline-offset:3px;box-shadow:0 0 0 2px rgba(0,0,0,.9),0 0 22px rgba(255,255,255,.16)}
+    #hnr1533-close-confirm .hnr1533-close-hint{margin-top:17px;color:#aaa;font-size:11px;font-weight:600;letter-spacing:.01em}
+    #hnr1533-close-confirm .hnr1533-close-hint strong{color:#fff}
+    @media(max-height:600px){#hnr1533-close-confirm .hnr1533-close-card{padding:18px 20px}#hnr1533-close-confirm .hnr1533-close-title{font-size:23px;margin-bottom:7px}#hnr1533-close-confirm .hnr1533-close-copy{margin-bottom:15px}#hnr1533-close-confirm .hnr1533-close-choice{height:44px}#hnr1533-close-confirm .hnr1533-close-hint{margin-top:10px}}
+  `;
+  document.documentElement.append(style);
+  const root = document.createElement("div");
+  root.id = "hnr1533-close-confirm";
+  root.hidden = true;
+  root.setAttribute("role", "dialog");
+  root.setAttribute("aria-modal", "true");
+  root.setAttribute("aria-label", "Close browser confirmation");
+  root.innerHTML = '<div class="hnr1533-close-card"><div class="hnr1533-close-eyebrow">TV Remote</div><h2 class="hnr1533-close-title">Close browser?</h2><p class="hnr1533-close-copy">Close this Chrome window and return to Playnite?</p><div class="hnr1533-close-actions"><button type="button" class="hnr1533-close-choice" data-choice="yes">Yes, close</button><button type="button" class="hnr1533-close-choice" data-choice="no">No, stay</button></div><div class="hnr1533-close-hint"><strong>← / →</strong> choose · <strong>OK</strong> confirm · <strong>Back</strong> cancel</div></div>';
+  root.addEventListener("click", event => {
+    const button = event.target.closest("[data-choice]");
+    if (!button) return;
+    if (button.dataset.choice === "yes") hnr1533ConfirmCloseWindow();
+    else hnr1533HideCloseConfirm();
+  });
+  document.documentElement.append(root);
+  hnr1533CloseConfirm = root;
+  return root;
+}
+
+function hnr1533UpdateCloseConfirm() {
+  if (!hnr1533CloseConfirm) return;
+  const buttons = [...hnr1533CloseConfirm.querySelectorAll("[data-choice]")];
+  buttons.forEach((button, index) => {
+    const selected = index === hnr1533CloseConfirmSelection;
+    button.classList.toggle("selected", selected);
+    button.setAttribute("aria-pressed", String(selected));
+  });
+}
+
+function hnr1533ShowCloseConfirm(triggerKey = "Backspace") {
+  const root = hnr1533BuildCloseConfirm();
+  hnr1533CloseConfirmSelection = 1; // Default to No.
+  root.hidden = false;
+  hnr1533UpdateCloseConfirm();
+  console.info("[TV Remote] Close confirmation shown", { triggerKey, route: location.pathname, selection: "No" });
+}
+
+function hnr1533HideCloseConfirm() {
+  if (hnr1533CloseConfirm) hnr1533CloseConfirm.hidden = true;
+  console.info("[TV Remote] Close confirmation dismissed");
+}
+
+function hnr1533ConfirmCloseWindow() {
+  console.info("[TV Remote] Close confirmed; requesting Chrome window close.");
+  try {
+    chrome.runtime.sendMessage({ type: "HNR_CLOSE_NETFLIX_BROWSE_TAB" }, response => {
+      if (chrome.runtime.lastError) {
+        console.error("[TV Remote] Chrome window close request failed:", chrome.runtime.lastError.message);
+        status("Could not close browser window");
+      } else if (!response?.ok) {
+        console.error("[TV Remote] Chrome window close rejected:", response);
+        status("Could not close browser window");
+      } else {
+        console.info("[TV Remote] Chrome window close accepted.", response);
+      }
+    });
+  } catch (error) {
+    console.error("[TV Remote] Could not send browser-close request:", error);
+    status("Could not close browser window");
+  }
+}
+
+function hnr1533HandleCloseConfirmKey(e) {
+  if (!hnr1533CloseConfirm || hnr1533CloseConfirm.hidden) return false;
+  if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Tab"].includes(e.key)) {
+    hnr1533CloseConfirmSelection = 1 - hnr1533CloseConfirmSelection;
+    hnr1533UpdateCloseConfirm();
+  } else if (e.key === "Enter" || e.key === " ") {
+    if (hnr1533CloseConfirmSelection === 0) hnr1533ConfirmCloseWindow();
+    else hnr1533HideCloseConfirm();
+  } else if (e.key === "Escape" || e.key === "BrowserBack" || hnr1533IsBackspaceKey(e)) {
+    hnr1533HideCloseConfirm();
+  }
+  e.preventDefault();
+  e.stopImmediatePropagation();
+  return true;
+}
+
 function onKey(e) {
  if (hnr1533DispatchingNativeShortcut || hnr1533BypassKeyRouter) return;
  if(e.altKey||e.ctrlKey||e.metaKey)return;
  if(e.isTrusted) keyPressCount++;
  const active=document.activeElement;
+ if (hnr1533HandleCloseConfirmKey(e)) return;
  // If Netflix left a native tray open after the extension exited its mode, let Escape
  // retry native dismissal rather than merely hiding the extension overlay.
  if (location.pathname.startsWith('/watch/') && (e.key === 'Escape' || e.key === 'BrowserBack')) {
@@ -3138,23 +3241,17 @@ function onKey(e) {
      return;
    }
  }
- if(e.key==="Escape"||e.key==="BrowserBack"||(e.key==="Backspace"&&!isText(active))) {
+ if(e.key==="Escape"||e.key==="BrowserBack"||hnr1533IsBackspaceKey(e)) {
    const i=searchInput();
    if(i && (i.value.trim() || visible(i))) {
      closeSearch(); e.preventDefault(); e.stopImmediatePropagation(); return;
    }
-   // Escape exits Netflix immediately on the browse page. Backspace exits only
-   // through the dedicated 2-second hold detector below, so short presses do
-   // not interfere with ordinary navigation.
-   const isBareBrowsePage = location.pathname === "/" || location.pathname === "/browse" || location.pathname.startsWith("/browse/");
-   const shouldCloseBrowse = e.key === "Escape";
-   if (shouldCloseBrowse && isBareBrowsePage) {
+   // On Netflix's browse/home tabs, Back asks for confirmation rather than
+   // closing the Chrome window immediately. Search, More Info, and playback
+   // have already taken priority in the handlers above.
+   if (hnr1533IsBrowseHomeRoute() && !hnr1533IsPlayerActive() && !activeModal() && !hnr1533KeyboardVisible) {
      e.preventDefault(); e.stopImmediatePropagation();
-     try {
-       chrome.runtime.sendMessage({ type: "HNR_CLOSE_NETFLIX_BROWSE_TAB" }, response => {
-         if (chrome.runtime.lastError || !response?.ok) status("Could not close Netflix tab");
-       });
-     } catch { status("Could not close Netflix tab"); }
+     hnr1533ShowCloseConfirm(e.key || (hnr1533IsBackspaceKey(e) ? "Backspace" : "Back"));
      return;
    }
    if (e.key === "Escape") { e.preventDefault(); e.stopImmediatePropagation(); }
@@ -3174,71 +3271,7 @@ function onKey(e) {
  if(handled){e.preventDefault();e.stopImmediatePropagation();}
  if(e.key==="Enter"&&selected&&rendered(selected)&&!isText(selected)){e.preventDefault();e.stopImmediatePropagation();selected.click();}
 }
-// Key-event diagnostics plus Backspace long-press exit for Netflix browse routes.
-// Diagnostic build logs every key so we can verify the actual input delivered by CEC Tray.
-console.info("[TV Remote Debug] Content script loaded:", location.href);
-let hnrBackspaceHoldTimer = null;
-let hnrBackspaceHoldTriggered = false;
-const hnrIsNetflixBrowseRoute = () => location.pathname === "/" || location.pathname === "/browse" || location.pathname.startsWith("/browse/");
-const hnrIsBackspaceEvent = e => e.key === "Backspace" || e.code === "Backspace" || e.keyCode === 8 || e.which === 8;
-const hnrKeyDebugDetails = e => ({
-  key: e.key,
-  code: e.code,
-  keyCode: e.keyCode,
-  which: e.which,
-  repeat: e.repeat,
-  route: location.pathname,
-  target: e.target?.tagName || null,
-  targetId: e.target?.id || null,
-  targetRole: e.target?.getAttribute?.("role") || null,
-  activeElement: document.activeElement?.tagName || null,
-  activeElementId: document.activeElement?.id || null,
-  defaultPrevented: e.defaultPrevented
-});
-
-document.addEventListener("keydown", e => {
-  console.log("[TV Remote Debug] keydown:", hnrKeyDebugDetails(e));
-  if (!hnrIsBackspaceEvent(e)) return;
-  if (!hnrIsNetflixBrowseRoute()) {
-    console.log("[TV Remote Debug] Backspace ignored for hold-exit: not on Netflix browse route.");
-    return;
-  }
-  if (e.repeat) {
-    console.log("[TV Remote Debug] Backspace repeat event received; initial hold timer remains active.");
-    return;
-  }
-
-  hnrBackspaceHoldTriggered = false;
-  console.log("[TV Remote] Backspace pressed on Netflix browse page; waiting 2000ms for hold.");
-  if (hnrBackspaceHoldTimer !== null) window.clearTimeout(hnrBackspaceHoldTimer);
-  hnrBackspaceHoldTimer = window.setTimeout(() => {
-    hnrBackspaceHoldTimer = null;
-    hnrBackspaceHoldTriggered = true;
-    console.log("[TV Remote] Backspace HOLD DETECTED (2000ms). Requesting Chrome window close.");
-    try {
-      chrome.runtime.sendMessage({ type: "HNR_CLOSE_NETFLIX_BROWSE_TAB" }, response => {
-        if (chrome.runtime.lastError) {
-          console.error("[TV Remote] Kiosk close request failed:", chrome.runtime.lastError.message);
-        } else {
-          console.log("[TV Remote] Kiosk close response:", response);
-        }
-      });
-    } catch (err) {
-      console.error("[TV Remote] Could not send kiosk close request:", err);
-    }
-  }, 2000);
-}, true);
-
-document.addEventListener("keyup", e => {
-  console.log("[TV Remote Debug] keyup:", hnrKeyDebugDetails(e));
-  if (!hnrIsBackspaceEvent(e)) return;
-  if (hnrBackspaceHoldTimer !== null) {
-    window.clearTimeout(hnrBackspaceHoldTimer);
-    hnrBackspaceHoldTimer = null;
-    if (!hnrBackspaceHoldTriggered) console.log("[TV Remote] Backspace released before 2000ms; hold not detected.");
-  }
-  hnrBackspaceHoldTriggered = false;
-}, true);
+console.info("[TV Remote] Content script ready:", location.href);
 
 document.addEventListener("keydown", onKey, true);
 document.addEventListener("input", e => {

@@ -186,3 +186,8 @@ On Netflix home/browse routes, holding Backspace for 2 seconds logs the hold det
 ## v1.5.48 — Key-event debug build
 
 This diagnostic build logs content-script startup plus every page `keydown` and `keyup`, including `key`, `code`, legacy key codes, repeat state, route, and focused element. On Netflix browse routes, a Backspace key held for 2 seconds still requests closing the entire Chrome window. Test only in a browser window you are comfortable closing.
+
+
+## Back-to-close confirmation (v1.5.49)
+
+On Netflix home/browse tabs, the remote's Backspace mapping opens a Yes/No confirmation to close the current Chrome window. Escape and Browser Back use the same confirmation. The default selection is **No**. Use the arrow keys to choose and Enter/OK to confirm; Backspace/Escape dismisses the prompt. Existing search keyboard/input, More Info dialog, and playback handlers take priority. The search keyboard was also made shorter vertically. This behavior has passed static checks but still requires live testing with the specific Pulse-Eight/CEC Tray key mapping and Netflix layout.
